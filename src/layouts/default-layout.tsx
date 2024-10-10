@@ -1,16 +1,24 @@
 import { Header } from "@/components/header";
 import { Sidebar } from "@/components/sidebar";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Outlet, useLocation, useRevalidator } from "react-router-dom";
 
 export function DefaultLayout() {
 
     const revalidator = useRevalidator();
     const location = useLocation();
+    const previousChatId = useRef<string | null>(null); 
+
 
     useEffect(() => {
-        revalidator.revalidate()
-    }, [location.pathname, revalidator])
+        const currentChatId = location.pathname.split("/")[1];
+    
+        if (currentChatId && currentChatId !== previousChatId.current) {
+            previousChatId.current = currentChatId;
+            revalidator.revalidate();
+        }
+
+    }, [location.pathname, revalidator]);
 
 
 
