@@ -10,7 +10,7 @@ const root = path.join(__dirname, "..");
 export async function uploadToS3() {
     return new Promise((resolve, reject) => {
         exec(
-            `cd ${root}/dist && aws s3 cp --recursive . s3://gemini-app-front/ --profile rodrigosilva`,
+            `cd ${root}/dist && aws s3 cp --recursive . s3://rodrigoteix.com/ --profile rodrigosilva`,
             (error, stdout, stderr) => {
             if (error) {
                 console.error(error);
