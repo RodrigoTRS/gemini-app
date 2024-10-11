@@ -4,6 +4,9 @@ import { HomePage } from "./pages/home";
 import { ChatPage } from "./pages/chat";
 import { fetchChat } from "./loaders/fetch-chat";
 import { listChats } from "./actions/list-chats";
+import { AuthLayout } from "./layouts/auth-layout";
+import { LoginPage } from "./pages/auth/login";
+import { RegisterPage } from "./pages/auth/register";
 
 export const routes = createBrowserRouter([
     {
@@ -21,5 +24,19 @@ export const routes = createBrowserRouter([
             }
         ],
         loader:listChats
+    },
+    {
+        path: "/auth",
+        element: <AuthLayout />,
+        children: [
+            {
+                index: true,
+                element: <LoginPage />
+            },
+            {
+                path: "/auth/register",
+                element: <RegisterPage />
+            }
+        ]
     }
 ])
